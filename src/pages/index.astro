@@ -1,0 +1,176 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import TimelineCard from '../components/TimelineCard.astro';
+import Contact from '../components/Contact.astro';
+
+const sblCards = [
+  {
+    title: 'Data Pipeline & Dashboard',
+    period: '2022.01 - 2024.12',
+    institution: 'Samsung Biologics',
+    description: 'Built the department\'s first data infrastructure from zero. Integrated 5 enterprise systems (EAM, SAP, LIMS, HR, Veeva EQUIS) into Azure EDW with Power BI dashboards. Transformed a team of 250 from "request and wait a week" to "check the dashboard."',
+    metrics: [
+      { label: 'Users', value: '250 users' },
+      { label: 'Systems', value: '5 systems' },
+      { label: 'Speed', value: '1 week to 1 hour' },
+    ],
+  },
+  {
+    title: 'Lab Equipment Consolidation',
+    period: '2020 - 2024',
+    institution: 'Samsung Biologics',
+    description: 'Led PMO for centralizing lab equipment management across 5 departments. Designed a governance system where 250 lab personnel submit service requests to an 8-person central team. Onboarded 1,500+ CDO devices from Non-GMP to GMP. Zero major complaints.',
+    metrics: [
+      { label: 'Budget', value: 'KRW 8B' },
+      { label: 'Equipment', value: '5,000+' },
+      { label: 'Departments', value: '5 depts' },
+    ],
+  },
+  {
+    title: 'Vendor Settlement Investigation',
+    period: '2022 Summer',
+    institution: 'Samsung Biologics',
+    description: 'Led a 6-person team through a 2-month forensic audit of 6 years of vendor settlements. Cross-verified every line item between vendor invoices and EAM work records. Found both overpayments and underpayments, reporting both to maintain vendor trust. Delivered findings directly to the CEO.',
+    metrics: [
+      { label: 'Discrepancy', value: 'KRW 700M' },
+      { label: 'Audit span', value: '6 years' },
+      { label: 'Post-fix errors', value: 'Zero' },
+    ],
+  },
+];
+
+const academicCards = [
+  {
+    title: 'CargoOps Digital Twin WMS',
+    period: 'Jan - Jul 2025',
+    institution: 'CMU Capstone',
+    description: 'Designed a full AWS serverless architecture (DynamoDB, SQS, Athena, QuickSight) for warehouse management. Built a Digital Twin simulation proving 2x throughput with the same budget. Random Forest models for 6 process stages.',
+    metrics: [
+      { label: 'Throughput', value: '2x proven' },
+      { label: 'Architecture', value: 'AWS Serverless' },
+      { label: 'Models', value: '6 RF models' },
+    ],
+  },
+  {
+    title: 'Project Affinity',
+    period: 'Jan - Jul 2025',
+    institution: 'CMU',
+    description: 'Analyzed 75,000+ Instagram posts with a multimodal pipeline: Inception V3 CNN for image classification, LLM for brand-influencer fitness scoring. Proved that a 10-point fitness score increase drives 13.2% more comments on sponsored posts.',
+    metrics: [
+      { label: 'Data', value: '75K posts' },
+      { label: 'Impact', value: '13.2% lift' },
+      { label: 'Method', value: 'CNN + LLM' },
+    ],
+  },
+  {
+    title: 'D&G Luxury Strategy',
+    period: 'Sep - Dec 2025',
+    institution: 'Bocconi',
+    description: 'Combined Python web crawling (quantitative) with Milan Retail Safari (qualitative) to analyze D&G vs. Prada men\'s outerwear. Proposed a "New Essentials" 20-SKU line. Presented to and evaluated by an actual D&G merchandiser.',
+    metrics: [
+      { label: 'Method', value: 'Omnichannel' },
+      { label: 'Proposal', value: '20 SKU line' },
+      { label: 'Validation', value: 'D&G merchandiser' },
+    ],
+  },
+];
+
+const projectCards = [
+  {
+    title: 'TBT_Researcher',
+    description: 'Regulatory impact analysis platform. 3-stage pipeline: foreign regulation vs. Korean law mapping (RAG), economic impact assessment, WTO violation evaluation + protest draft generation.',
+    tech: 'FastAPI, Claude/Groq/Gemini, ChromaDB, Streamlit',
+    link: 'https://github.com/diziba213',
+  },
+  {
+    title: 'TasteTrip',
+    description: 'Travel personality profiler. 16-scene tournament for 8-axis profiling, Claude API for personalized destination recommendations, Google Places API for real locations.',
+    tech: 'Next.js 16, React 19, FastAPI, Claude API, Supabase',
+    link: 'https://github.com/diziba213',
+  },
+  {
+    title: 'Manufacturing-AI-Platform',
+    description: 'Pharmaceutical equipment AI system. 4-phase architecture: predictive maintenance (XGBoost), equipment manual RAG Q&A, agentic AI data analysis, integrated platform.',
+    tech: 'Python, scikit-learn, XGBoost, SHAP, LangChain, Streamlit',
+    link: 'https://github.com/diziba213',
+  },
+];
+
+const moreProjects = [
+  { title: 'Kakaotalk Stock Reporter', description: 'Real-time sentiment trading with multi-source data collection' },
+  { title: 'Bocconi Luxury Crawler', description: '806 unique products collected from D&G + Prada' },
+];
+---
+
+<Base>
+  <Nav />
+
+  <main id="main-content">
+    <Hero />
+
+    <!-- Chapter 1: Samsung Biologics -->
+    <section id="samsung" class="py-24 px-4 max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">Samsung Biologics</h2>
+        <p class="text-[var(--color-text-muted)] font-mono">2017.07 - 2024.12 | 7 years 6 months</p>
+      </div>
+
+      <div class="relative">
+        <div class="timeline-line" aria-hidden="true"></div>
+        {sblCards.map((card, i) => (
+          <TimelineCard {...card} index={i} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Chapter 2: Academic -->
+    <section id="academic" class="py-24 px-4 max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">Then I left it all.</h2>
+        <p class="text-[var(--color-text-muted)] font-mono">CMU + Bocconi | 2025</p>
+      </div>
+
+      <div class="relative">
+        <div class="timeline-line" aria-hidden="true"></div>
+        {academicCards.map((card, i) => (
+          <TimelineCard {...card} index={i} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Chapter 3: Builder -->
+    <section id="projects" class="py-24 px-4 max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-2">5 projects. Under 6 months.</h2>
+        <p class="text-[var(--color-text-muted)] font-mono">Side Projects | 2025 - 2026</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {projectCards.map((project) => (
+          <a href={project.link} target="_blank" rel="noopener noreferrer"
+             class="p-6 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors timeline-card block"
+             tabindex="0">
+            <h3 class="text-lg font-bold mb-2">{project.title}</h3>
+            <p class="text-sm text-[var(--color-text-muted)] mb-4">{project.description}</p>
+            <p class="text-xs font-mono text-[var(--color-accent)]">{project.tech}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center text-sm text-[var(--color-text-muted)]">
+        <p>More projects:
+          {moreProjects.map((p, i) => (
+            <span>
+              <span class="text-[var(--color-text)]">{p.title}</span>
+              {' '}({p.description}){i < moreProjects.length - 1 ? ', ' : ''}
+            </span>
+          ))}
+        </p>
+      </div>
+    </section>
+
+    <Contact />
+  </main>
+</Base>

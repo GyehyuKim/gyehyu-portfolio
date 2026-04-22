@@ -1,0 +1,94 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Gyehyu Kim - Field Engineer to AI Builder",
+  description = "7.5 years Samsung Biologics. CMU + Bocconi. 5 side projects. Scroll the story."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- OG Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <slot />
+
+    <!-- Lenis + GSAP ScrollTrigger init -->
+    <script>
+      import Lenis from 'lenis';
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReducedMotion) {
+        const lenis = new Lenis({ duration: 1.2, easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time: number) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        // Batch card reveals
+        ScrollTrigger.batch('.timeline-card', {
+          onEnter: (elements) => {
+            elements.forEach((el) => el.classList.add('visible'));
+          },
+          start: 'top 85%',
+        });
+
+        // Counter animations
+        document.querySelectorAll<HTMLElement>('[data-count-to]').forEach((el) => {
+          const target = parseFloat(el.dataset.countTo || '0');
+          const suffix = el.dataset.countSuffix || '';
+          const prefix = el.dataset.countPrefix || '';
+
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 90%',
+            once: true,
+            onEnter: () => {
+              gsap.from(el, {
+                textContent: 0,
+                duration: 1.5,
+                ease: 'power2.out',
+                snap: { textContent: 1 },
+                onUpdate: function () {
+                  el.textContent = prefix + Math.round(parseFloat(el.textContent || '0')) + suffix;
+                },
+                onComplete: () => {
+                  el.textContent = prefix + target + suffix;
+                },
+              });
+            },
+          });
+        });
+      } else {
+        // Reduced motion: show all cards immediately
+        document.querySelectorAll('.timeline-card').forEach((el) => el.classList.add('visible'));
+      }
+    </script>
+  </body>
+</html>

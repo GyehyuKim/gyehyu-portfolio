@@ -1,0 +1,21 @@
+---
+const links = [
+  { href: '#samsung', label: 'Samsung Biologics' },
+  { href: '#academic', label: 'Academic' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[var(--color-bg)]/80 border-b border-[var(--color-border)]" aria-label="Main navigation">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#" class="font-mono font-bold text-[var(--color-accent)] text-sm">GK</a>
+    <div class="flex gap-6">
+      {links.map((link) => (
+        <a href={link.href} class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
