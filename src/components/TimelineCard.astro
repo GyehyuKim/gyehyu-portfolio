@@ -9,9 +9,10 @@ interface Props {
 }
 
 const { title, period, institution, description, metrics, index } = Astro.props;
+const positionClass = index % 2 === 0 ? 'lg:pr-12 lg:ml-0' : 'lg:pl-12 lg:ml-auto';
 ---
 
-<article class="timeline-card relative pl-12 lg:pl-0 lg:w-1/2 mb-12 {index % 2 === 0 ? 'lg:pr-12 lg:ml-0' : 'lg:pl-12 lg:ml-auto'}" tabindex="0">
+<article class:list={["timeline-card relative pl-12 lg:pl-0 lg:w-1/2 mb-12", positionClass]} tabindex="0">
   <div class="timeline-node" aria-hidden="true"></div>
 
   <div class="p-6 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors">
